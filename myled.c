@@ -1,16 +1,3 @@
-Copyright (c) 2018 shimizu keigo
-
-This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 
 #include <linux/module.h>
 #include <linux/fs.h>
@@ -19,7 +6,7 @@ This program is free software: you can redistribute it and/or modify
 #include <linux/uaccess.h>
 #include <linux/io.h>
 
-MODULE_AUTHOR("Ryuichi Ueda");
+MODULE_AUTHOR("Keigo Shimizu");
 MODULE_DESCRIPTION("driver for LED contorol");
 MODULE_LICENSE("GPL");
 MODULE_VERSION("0.1");
@@ -64,6 +51,7 @@ static int __init init_mod(void)
 	retval = alloc_chrdev_region(&dev, 0, 1, "myled");
 	if(retval < 0){
 		printk(KERN_ERR "alloc_chrdev_region failed.\n");
+        return retval;
 	}
 
 	printk(KERN_INFO "%s is loaded. major:%d\n", __FILE__,MAJOR(dev));
